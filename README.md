@@ -1,5 +1,3 @@
-
-----------------
 Sarasvati - Music Streaming Service
 ----------------
 # Modelagem de um software em Java para disciplina Análise e Projeto de Software, UFPA. 
