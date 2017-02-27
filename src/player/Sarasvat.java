@@ -1,4 +1,4 @@
-package musicPlayer;
+package player;
 
 public class Sarasvat {
 
