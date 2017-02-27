@@ -42,8 +42,7 @@ public class Helper {
 	
 	//Global Variables
 	
-		public static JsonObject colorJSON;
-		public static JsonArray playlistJSON;
+		public static Color color;
 		
 		public static Sarasvat sarasvat;
 		public static MusicPlayer musicPlayer;
@@ -62,5 +61,16 @@ public class Helper {
 		public static File nowPlaying;
 		
 		
+		public static void getMusic(){}
+		public static ArrayList<String> getFolders(){
+			
+		}
+		public static String getSongTitle(String path){}
+			
+		public static String getSongArtist(String path){}
 		
+		public static Graphics2D getSmoothedGraphics(Graphics g){}
+		
+		public static Image loadResourceImage(String path)
+			
 }

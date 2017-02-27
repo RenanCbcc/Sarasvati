@@ -45,27 +45,27 @@ ArrayList<Song> songs = new ArrayList<Song>();
 		Helper.getMusic();
 		folderList = Helper.getFolders();
 		
-		Song painel = new Song("Back", "Move back a directory", "/");
-		painel.tipo = Song.BACK;
-		painel.setBounds(0, 0, width, 40);
-		holder.add(painel);
+		Song panel = new Song("Back", "Move back a directory", "/");
+		panel.tipo = Song.BACK;
+		panel.setBounds(0, 0, width, 40);
+		holder.add(panel);
 		
 		//Draw folders
 		for (int i = 0; i < folderList.size(); i++){
 			String path = System.getProperty("user.home") + Helper.musicPath + folderList.get(i) + ".mp3";
 					
-			painel = new Song(folderList.get(i), "Folder", path);
-			painel.setBounds(0, i * 40 + 40, width, 40);
-			holder.add(painel);
+			panel = new Song(folderList.get(i), "Folder", path);
+			panel.setBounds(0, i * 40 + 40, width, 40);
+			holder.add(panel);
 		}
 		
 		//Draw songs
 		for (int i = 0; i < Helper.currentSongList.size(); i++){
 			String path = Helper.currentSongList.get(i);
 			
-			painel = new Song(Helper.getSongTitle(path), Helper.getSongArtist(path), path);
-			painel.setBounds(0, i * 40 + 40 + 40 * folderList.size(), width, 40);
-			holder.add(painel);
+			panel = new Song(Helper.getSongTitle(path), Helper.getSongArtist(path), path);
+			panel.setBounds(0, i * 40 + 40 + 40 * folderList.size(), width, 40);
+			holder.add(panel);
 		}
 		
 		holder.setBounds(0, 0, width, 40 * Helper.currentSongList.size() + 40 + 40 * folderList.size());
