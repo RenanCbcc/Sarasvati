@@ -2,6 +2,7 @@ package player;
 import button.CircleButton;
 import button.Helper;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -10,15 +11,19 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javafx.embed.swing.JFXPanel;
 
-public class MusicPlayer {
+
+public class MusicPlayer extends JFXPanel {
+	
 	String title, artist;
 	Image image, unknown;
 	
 	int x, y, width, height;
 	JFrame parent;
 	
-	CircleButton fastBackward, play, fastForward;
+	public CircleButton fastBackward, play, fastForward;
 	
 	public MusicPlayer(int x, int y, int width, int height, JFrame parent) {
 		super();
@@ -83,6 +88,7 @@ public class MusicPlayer {
 		artist = Helper.getSongArtist(Helper.nowPlaying.getAbsolutePath());
 		image = Helper.getAlbumArt(Helper.nowPlaying.getAbsolutePath());
 		
+			
 		repaint();
 	}
 	
@@ -92,19 +98,18 @@ public class MusicPlayer {
 		
 		Graphics2D g2 = Helper.getSmoothedGraphics(g);
 		
-			if (image != null) {
+		if (image != null) {
 			g2.drawImage(image, 20, 20, height - 40, height - 40, null);
 		} else {
 			g2.drawImage(unknown, 20, 20, height - 40, height - 40, null);
 		}
 		
 		g2.setColor(Helper.loadColorfromJSON("player_font"));
-		g2.setFont(new Font("Consolas",Font.ITALIC,12));
+		g2.setFont(new Font("Consolas",Font.BOLD,12));
 		g2.drawString(title, height, 36);
 		
 		g2.setFont(new Font("Consolas",Font.BOLD,12));
 		g2.drawString(artist, height, 50);
 		
-	
-	}
+		}
 }
