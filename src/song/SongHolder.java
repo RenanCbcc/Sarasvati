@@ -18,7 +18,7 @@ ArrayList<Song> songs = new ArrayList<Song>();
 	
 	boolean inPlaylist = false;
 	
-	SongHolder(int x, int y, int width, int height) {
+	public SongHolder(int x, int y, int width, int height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -46,7 +46,7 @@ ArrayList<Song> songs = new ArrayList<Song>();
 		folderList = Helper.getFolders();
 		
 		Song panel = new Song("Back", "Move back a directory", "/");
-		panel.tipo = Song.BACK;
+		panel.type = Song.BACK;
 		panel.setBounds(0, 0, width, 40);
 		holder.add(panel);
 		

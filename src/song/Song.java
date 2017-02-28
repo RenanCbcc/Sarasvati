@@ -10,65 +10,73 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
-public class Song extends JPanel{
+public class Song extends JPanel {
 	
-	String titulo, artista, caminho;
+	String title, artist, path;
+	
 	final public static int BACK = 0;
 	final public static int MUSIC = 1;
 	final public static int FOLDER = 2;
-	int tipo;
+	int type;
 	
-	public Song (String titulo, String artista, String caminho) 
-	{
+	public Song(String title, String artist, String path) {
 		
-		this.titulo = titulo;
-		this.artista = artista;
-		this.caminho = caminho;
+		this.title = title;
+		this.artist = artist;
+		this.path = path;
 		
+		setBackground(Helper.loadColorfromJSON("list_background"));
 		
-		if (artista.equals("Folder")){
-			this.tipo = FOLDER;
+		if (artist.equals("Folder")){
+			this.type = FOLDER;
 		} else {
-			this.tipo = MUSIC;
+			this.type = MUSIC;
 		}
 		
 		
 		MouseAdapter mouseAdapter = new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setBackground(Helper.loadColorfromJSON("list_background_hover"));
+			}
 			
 			@Override
-			public void mousePressed(MouseEvent e)
-			{
-				if (tipo == BACK)
-				{
-					if (caminho.equals("/"))
-					{
+			public void mouseExited(MouseEvent e) {
+				setBackground(Helper.loadColorfromJSON("list_background"));
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				setBackground(Helper.loadColorfromJSON("list_background_onclick"));
+				
+				if (type == BACK){
+					if (path.equals("/")){
 						String[] split = Helper.musicPath.split("/");
 						Helper.musicPath = "/";
-						for (int i = 0; i < split.length - 1; i++)
-						{
+						
+						for (int i = 0; i < split.length - 1; i++){
 							Helper.musicPath += split[i] + "/";
 						}
-						Helper.songHolder.createSongItems();
-						Helper.songHolder.repaint();
 						
-					} else if (tipo == FOLDER)
-					
-					{
-						Helper.musicPath += titulo + "/";
 						Helper.songHolder.createSongItems();
 						Helper.songHolder.repaint();
-					} else 
-					
-					{
-						//Helper.play(caminho);
 					}
+					} else if (type == FOLDER){
+					Helper.musicPath += title + "/";
+					Helper.songHolder.createSongItems();
+					Helper.songHolder.repaint();
+				} else {
+					Helper.play(path);
 				}
 			}
-		
-		};
 			
-	addMouseListener(mouseAdapter);
-	
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				setBackground(Helper.loadColorfromJSON("list_background_hover"));
+			}
+		};
+		
+		addMouseListener(mouseAdapter);
 	}
 	
 	@Override
@@ -79,20 +87,21 @@ public class Song extends JPanel{
 		
 		BufferedImage img;
 		Color iconColor = Helper.loadColorfromJSON("list_icon");
-		if (tipo == BACK){
+		if (type == BACK){
 			img = (BufferedImage) Helper.loadResourceImage("/back.png");
-		} else if (tipo == FOLDER){
+		} else if (type == FOLDER){
 			img = (BufferedImage) Helper.loadResourceImage("/folder.png");
 		} else {
 			img = (BufferedImage) Helper.loadResourceImage("/music.png");
 		}
 		g2.drawImage(Helper.changeImageColor(img, iconColor), 20, 10, 20, 20, null);
 		
-		g2.setColor(Color.DARK_GRAY);
+		g2.setColor(Color.lightGray);
 		g2.setFont(new Font("Consolas",Font.BOLD,12));
-		g2.drawString(titulo, 50, 22);
+		g2.drawString(title, 50, 22);
 		
 		g2.setFont(new Font("Consolas",Font.BOLD,12));
-		g2.drawString(artista, 50, 32);
+		g2.drawString(artist, 50, 32);
 	}
-}
+
+}	

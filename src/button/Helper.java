@@ -3,8 +3,6 @@ package button;
 import player.MusicPlayer;
 import player.Sarasvat;
 import song.SongHolder;
-import playlist.Playlist;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -122,24 +120,7 @@ public class Helper {
 				playlistJSON = (JsonArray) parser.parse(reader);
 				reader.close();
 				is.close();
-			} else {
-				playlistJSON = new JsonArray();
-			}
-			
-			for (int i = 0; i < playlistJSON.size(); i++){
-				JsonObject obj = (JsonObject) playlistJSON.get(i);
-				String name = obj.get("title").toString().replace('"', ' ').trim();
-				String description = obj.get("description").toString().replace('"', ' ').trim();
-				
-				Playlist p = new Playlist(name, description);
-				JsonArray songs = (JsonArray) obj.get("songs");
-				for (int j = 0; j < songs.size(); j++){
-					String song = songs.get(j).toString().replace('"', ' ').trim();
-					p.add(song);
-				}
-				
-				playlists.add(p);
-			}
+			} 
 			
 		} catch (Exception e) {
 			
@@ -164,32 +145,7 @@ public class Helper {
 			e.printStackTrace();
 		}
 		
-		String playlistPath = System.getProperty("user.home") + "/Music/Mix/playlists.json";
-		try {
-			Writer writer = new FileWriter(new File(playlistPath));
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			JsonArray playlist = new JsonArray();
-			
-			for (Playlist p : playlists){
-				JsonObject list = new JsonObject();
-				list.addProperty("title", p.name);
-				list.addProperty("description", p.description);
-				
-				JsonArray array = new JsonArray();
-				for (String s : p.songs){
-					array.add(s);
-				}
-				list.add("songs", array);
-				
-				playlist.add(list);
-			}
-			
-			gson.toJson(playlist, writer);
-			writer.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 	
 	//Get value from JSON file

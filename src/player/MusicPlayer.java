@@ -1,5 +1,4 @@
 package player;
-import song.SongProgress;
 import button.CircleButton;
 import button.Helper;
 import java.awt.Color;
@@ -11,7 +10,6 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javafx.embed.swing.JFXPanel;
 
 public class MusicPlayer {
 	String title, artist;
@@ -20,7 +18,6 @@ public class MusicPlayer {
 	int x, y, width, height;
 	JFrame parent;
 	
-	SongProgress songProgress;
 	CircleButton fastBackward, play, fastForward;
 	
 	public MusicPlayer(int x, int y, int width, int height, JFrame parent) {
@@ -45,8 +42,6 @@ public class MusicPlayer {
 		
 		setBackground(Helper.loadColorfromJSON("player_background"));
 		
-		songProgress = new SongProgress(height, 60, 300 - 20 - height, 20, Helper.colorFromHEX("#ffffff"), this);
-		add(songProgress);
 		
 		int w = 300 - 20 - height;
 		int r = (w - 20) / 3;
@@ -87,8 +82,6 @@ public class MusicPlayer {
 		title = Helper.getSongTitle(Helper.nowPlaying.getAbsolutePath());
 		artist = Helper.getSongArtist(Helper.nowPlaying.getAbsolutePath());
 		image = Helper.getAlbumArt(Helper.nowPlaying.getAbsolutePath());
-		
-		songProgress.update();
 		
 		repaint();
 	}
