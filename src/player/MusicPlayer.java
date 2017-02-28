@@ -2,6 +2,7 @@ package player;
 import song.SongProgress;
 import button.CircleButton;
 import button.Helper;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -23,8 +24,41 @@ public class MusicPlayer extends JFXPanel {
 	int x, y, width, height;
 	JFrame parent;
 	
-	SongProgress songProgress;
-	CircleButton fastBackward, play, fastForward;
+	private SongProgress songProgress;
+	
+	public SongProgress getSongProgress() {
+		return songProgress;
+	}
+
+	public void setSongProgress(SongProgress songProgress) {
+		this.songProgress = songProgress;
+	}
+
+	public CircleButton getFastBackward() {
+		return fastBackward;
+	}
+
+	public void setFastBackward(CircleButton fastBackward) {
+		this.fastBackward = fastBackward;
+	}
+
+	public CircleButton getPlay() {
+		return play;
+	}
+
+	public void setPlay(CircleButton play) {
+		this.play = play;
+	}
+
+	public CircleButton getFastForward() {
+		return fastForward;
+	}
+
+	public void setFastForward(CircleButton fastForward) {
+		this.fastForward = fastForward;
+	}
+
+	private CircleButton fastBackward, play, fastForward;
 	
 	public MusicPlayer(int x, int y, int width, int height, JFrame parent) {
 		super();
@@ -116,4 +150,6 @@ public class MusicPlayer extends JFXPanel {
 		g2.drawString(artist, height, 50);
 		
 	}
+	
+	
 }

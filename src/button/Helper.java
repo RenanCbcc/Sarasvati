@@ -178,8 +178,8 @@ public class Helper {
 			
 			for (Playlist p : playlists){
 				JsonObject list = new JsonObject();
-				list.addProperty("title", p.name);
-				list.addProperty("description", p.description);
+				list.addProperty("title", p.getName());
+				list.addProperty("description", p.getDescription());
 				
 				JsonArray array = new JsonArray();
 				for (String s : p.songs){
@@ -267,7 +267,7 @@ public class Helper {
 			mediaPlayer.play();
 			
 			Helper.playing = true;
-			Helper.musicPlayer.play.setImage(Helper.pause);
+			Helper.musicPlayer.getPlay().setImage(Helper.pause);
 			Helper.musicPlayer.update();
 		}
 	}
@@ -293,7 +293,7 @@ public class Helper {
 		mediaPlayer.play();
 		
 		Helper.playing = true;
-		Helper.musicPlayer.play.setImage(Helper.pause);
+		Helper.musicPlayer.getPlay().setImage(Helper.pause);
 		Helper.musicPlayer.update();
 		
 		currentSongIndex = currentSongList.indexOf(path);
@@ -306,7 +306,7 @@ public class Helper {
 			mediaPlayer.pause();
 			
 			Helper.playing = false;
-			Helper.musicPlayer.play.setImage(Helper.play);
+			Helper.musicPlayer.getPlay().setImage(Helper.play);
 			Helper.musicPlayer.update();
 		}
 	}

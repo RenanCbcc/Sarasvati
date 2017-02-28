@@ -86,5 +86,6 @@ public class Sarasvat extends JFrame {
 	public static void main(String[] args) {
 		Helper.init();
 		Sarasvat saraswat = new Sarasvat();
+		saraswat.setVisible(true);
 	}
 }
