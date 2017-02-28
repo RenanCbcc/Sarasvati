@@ -19,7 +19,7 @@ public class Song extends JPanel {
 	final public static int FOLDER = 2;
 	int type;
 	
-	public Song(String title, String artist, String path) {
+	Song(String title, String artist, String path) {
 		
 		this.title = title;
 		this.artist = artist;
@@ -60,8 +60,12 @@ public class Song extends JPanel {
 						
 						Helper.songHolder.createSongItems();
 						Helper.songHolder.repaint();
+					} else {
+						Helper.songHolder.setInPlaylist(false);
+						Helper.songHolder.createPlaylistItems();
+						Helper.songHolder.repaint();
 					}
-					} else if (type == FOLDER){
+				} else if (type == FOLDER){
 					Helper.musicPath += title + "/";
 					Helper.songHolder.createSongItems();
 					Helper.songHolder.repaint();
@@ -96,12 +100,11 @@ public class Song extends JPanel {
 		}
 		g2.drawImage(Helper.changeImageColor(img, iconColor), 20, 10, 20, 20, null);
 		
-		g2.setColor(Color.lightGray);
-		g2.setFont(new Font("Consolas",Font.BOLD,12));
+		g2.setColor(Helper.loadColorfromJSON("list_font"));
+		g2.setFont(Helper.lato_normal.deriveFont(14f));
 		g2.drawString(title, 50, 22);
 		
-		g2.setFont(new Font("Consolas",Font.BOLD,12));
+		g2.setFont(Helper.lato_light.deriveFont(10f));
 		g2.drawString(artist, 50, 32);
 	}
-
-}	
+}

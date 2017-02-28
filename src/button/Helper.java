@@ -1,5 +1,6 @@
 package button;
-
+import playlist.Playlist;
+import player.Equalizer;
 import player.MusicPlayer;
 import player.Sarasvat;
 import song.SongHolder;
@@ -35,9 +36,11 @@ import javafx.scene.media.MediaPlayer;
 
 
 public class Helper {
-	
-	public static Font Consolas_normal;
-	public static Font Consolas_bold;
+
+	//Resources
+	public static Font lato_light;
+	public static Font lato_normal;
+	public static Font lato_bold;
 	
 	public static Image play;
 	public static Image pause;
@@ -51,6 +54,7 @@ public class Helper {
 	public static MusicPlayer musicPlayer;
 	public static SongHolder songHolder;
 	
+	public static Equalizer equalizer;
 	public static double volume = 1.0;
 	
 	public static String musicPath = "/Music/";
@@ -60,6 +64,7 @@ public class Helper {
 	public static int currentPlaylistIndex = -1;
 	public static ArrayList<String> currentPlaylist = new ArrayList<String>();
 	
+	public static ArrayList<Playlist> playlists = new ArrayList<Playlist>();
 	
 	public static Media media;
 	public static MediaPlayer mediaPlayer;
@@ -87,9 +92,9 @@ public class Helper {
 	//Load font into the function
 	public static void loadFont(){
 		try {
-			
-			Consolas_normal = Font.createFont(Font.TRUETYPE_FONT, Sarasvat.class.getResourceAsStream("/Lato-Regular.ttf"));
-			Consolas_bold = Font.createFont(Font.TRUETYPE_FONT, Sarasvat.class.getResourceAsStream("/Lato-Bold.ttf"));
+			lato_light = Font.createFont(Font.TRUETYPE_FONT, Sarasvat.class.getResourceAsStream("/Lato-Light.ttf"));
+			lato_normal = Font.createFont(Font.TRUETYPE_FONT, Sarasvat.class.getResourceAsStream("/Lato-Regular.ttf"));
+			lato_bold = Font.createFont(Font.TRUETYPE_FONT, Sarasvat.class.getResourceAsStream("/Lato-Bold.ttf"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -123,7 +128,24 @@ public class Helper {
 				playlistJSON = (JsonArray) parser.parse(reader);
 				reader.close();
 				is.close();
-			} 
+			} else {
+				playlistJSON = new JsonArray();
+			}
+			
+			for (int i = 0; i < playlistJSON.size(); i++){
+				JsonObject obj = (JsonObject) playlistJSON.get(i);
+				String name = obj.get("title").toString().replace('"', ' ').trim();
+				String description = obj.get("description").toString().replace('"', ' ').trim();
+				
+				Playlist p = new Playlist(name, description);
+				JsonArray songs = (JsonArray) obj.get("songs");
+				for (int j = 0; j < songs.size(); j++){
+					String song = songs.get(j).toString().replace('"', ' ').trim();
+					p.add(song);
+				}
+				
+				playlists.add(p);
+			}
 			
 		} catch (Exception e) {
 			
@@ -148,7 +170,32 @@ public class Helper {
 			e.printStackTrace();
 		}
 		
-		
+		String playlistPath = System.getProperty("user.home") + "/Music/Mix/playlists.json";
+		try {
+			Writer writer = new FileWriter(new File(playlistPath));
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			JsonArray playlist = new JsonArray();
+			
+			for (Playlist p : playlists){
+				JsonObject list = new JsonObject();
+				list.addProperty("title", p.name);
+				list.addProperty("description", p.description);
+				
+				JsonArray array = new JsonArray();
+				for (String s : p.songs){
+					array.add(s);
+				}
+				list.add("songs", array);
+				
+				playlist.add(list);
+			}
+			
+			gson.toJson(playlist, writer);
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	//Get value from JSON file
@@ -206,6 +253,10 @@ public class Helper {
 		return folderList;
 	}
 	
+	public static void getPlaylistMusic(){
+		currentSongList = playlists.get(currentPlaylistIndex).songs;
+		currentSongIndex = 0;
+	}
 	
 	public static void play(){
 		if (mediaPlayer == null){
@@ -358,5 +409,4 @@ public class Helper {
 			mediaPlayer.setVolume(value);
 		}	
 	}
-			
 }

@@ -8,12 +8,15 @@ import song.SongHolder;
 import java.awt.event.MouseAdapter;
 import javax.swing.JFrame;
 
-public class Sarasvat extends JFrame{
+public class Sarasvat extends JFrame {
 	
+	public static final String VERSION = "1.0";
 	public static final int WIDTH = 300;
 	public static final int HEIGHT = 450;
 	JFrame frame = this;
-	boolean playlist = false;
+	
+	public boolean playlist = false;
+	
 	CircleButton closeButton = new CircleButton(5, 5, 10, Helper.colorFromHEX("#fc625d"), new MouseAdapter() {public void mousePressed(java.awt.event.MouseEvent e) {
 		Helper.saveJSON();
 		System.exit(0);
@@ -39,7 +42,7 @@ public class Sarasvat extends JFrame{
 				mymusic.setText("PLAYLISTS");
 				playlist = true;
 				
-				
+				Helper.songHolder.createPlaylistItems();
 			}
 			repaint();
 		};
@@ -47,11 +50,12 @@ public class Sarasvat extends JFrame{
 	
 	Button volume = new Button(0, HEIGHT - 30, 30, 30, Helper.loadResourceImage("/volume.png"), Helper.colorFromHEX("#ffffff"), new MouseAdapter() {
 		public void mousePressed(java.awt.event.MouseEvent e) {
+			Equalizer equalizer = new Equalizer(frame, Helper.volume);
 		};
 	});
 	Button settings = new Button(WIDTH - 30, HEIGHT - 30, 30, 30, Helper.loadResourceImage("/settings.png"), Helper.colorFromHEX("#ffffff"), new MouseAdapter() {});
 	
-	Sarasvat(){
+	public Sarasvat(){
 		super();
 		
 		Helper.saraswat = this;
@@ -80,10 +84,7 @@ public class Sarasvat extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Helper.init();
 		Sarasvat saraswat = new Sarasvat();
-	
 	}
-
 }
