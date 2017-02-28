@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="Lib/basicplayer3.0.jar"/>
 	<classpathentry kind="lib" path="Lib/mp3agic-0.8.1.jar"/>
 	<classpathentry kind="lib" path="Lib/javafx-ui-swing.jar"/>
+	<classpathentry kind="lib" path="Lib/mp3spi1.9.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
