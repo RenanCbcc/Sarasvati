@@ -36,11 +36,10 @@ public class Helper {
 	public static Font consolas_light;
 	public static Font consolas_bold;
 	
-	public static BufferedImage play;
-	public static BufferedImage pause;
+	public static Image play;
+	public static Image pause;
 	
 	//Global Variables
-	
 	
 	public static Sarasvat saraswat;
 	public static MusicPlayer musicPlayer;
@@ -69,13 +68,9 @@ public class Helper {
 	public static void init(){
 		loadFont();
 		
-		try {
-			play = ImageIO.read(new File("D:/rep/play.png"));
-			pause = ImageIO.read(new File("D:/rep/pause.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			play = Helper.loadResourceImage("D:/rep/play.png");
+			pause = Helper.loadResourceImage("D:/rep/pause.png");
+		
 	}
 	
 	//Load font into the function
@@ -99,6 +94,14 @@ public class Helper {
 		hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g2.setRenderingHints(hints);
 		return g2;
+	}
+	
+	public static Image loadResourceImage(String path){
+		try {
+			return ImageIO.read(new File(path));
+		} catch (IOException e) {
+			return null;
+		}
 	}
 	
 	public static void getMusic(){
@@ -207,7 +210,7 @@ public class Helper {
 		return Helper.currentSongList.get(Helper.currentSongIndex - 1);
 	}
 	
-	
+	// desenha uma miniatura de musica
 	public static BufferedImage changeImageColor(BufferedImage img, Color color){
 		BufferedImage colored = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
 		for (int y = 0; y < img.getHeight(); y++){

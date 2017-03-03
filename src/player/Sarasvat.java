@@ -5,7 +5,6 @@ import button.TextButton;
 import button.CircleButton;
 import button.Button;
 import song.SongHolder;
-
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import javax.swing.JFrame;
@@ -26,16 +25,16 @@ public class Sarasvat extends JFrame {
 		frame.setState(ICONIFIED);
 	};});
 	
-	Menu menuBar = new Menu(0, 0, WIDTH, 20, Color.green, this);
+	Menu menuBar = new Menu(0, 0, WIDTH, 20, Color.lightGray, this);
 	
 	MusicPlayer player = new MusicPlayer(0, 20, 300, 150, this);
 	
 	SongHolder holder = new SongHolder(0, 170, 300, 250);
 	
-	TextButton mymusic = new TextButton("MY MUSIC", WIDTH / 2 - 50, HEIGHT - 30, 100, 30, new MouseAdapter() {
+	TextButton mymusic = new TextButton("Player", WIDTH / 2 - 50, HEIGHT - 30, 100, 30, new MouseAdapter() {
 		public void mousePressed(java.awt.event.MouseEvent e) {
 			if (playlist){
-				mymusic.setText("MY MUSIC");
+				mymusic.setText("Player");
 				playlist = false;
 				
 				Helper.songHolder.createSongItems();
@@ -49,11 +48,14 @@ public class Sarasvat extends JFrame {
 		};
 	});
 	
-	Button volume = new Button(0, HEIGHT - 30, 30, 30,Color.MAGENTA , new MouseAdapter() {
+	Button volume = new Button(0, HEIGHT - 30, 30, 30, Helper.loadResourceImage("D:/rep/volume.png"), Color.red, new MouseAdapter() {
 		public void mousePressed(java.awt.event.MouseEvent e) {
 			Equalizer equalizer = new Equalizer(frame, Helper.volume);
 		};
 	});
+	
+	
+	
 	
 	public Sarasvat(){
 		super();
@@ -65,7 +67,7 @@ public class Sarasvat extends JFrame {
 		setLocationRelativeTo(null);
 		setUndecorated(true);
 		
-		getContentPane().setBackground(Color.white);
+		getContentPane().setBackground(Color.WHITE); // cor de fundo do player
 		
 		add(closeButton);
 		add(minimizeButton);

@@ -10,8 +10,8 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.awt.Image;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class PlaylistItem extends JPanel {
@@ -92,7 +92,7 @@ public class PlaylistItem extends JPanel {
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
-				setBackground(Color.GRAY);
+				setBackground(Color.lightGray);
 				
 				if (e.getX() > getWidth() - 40 && e.getX() < getWidth() - 20 && e.getY() > 10 && e.getY() < getHeight() - 10){
 					delete();
@@ -129,24 +129,20 @@ public class PlaylistItem extends JPanel {
 		
 		Graphics2D g2 = Helper.getSmoothedGraphics(g);
 		
-		BufferedImage img;
-		Color iconColor = Color.MAGENTA;
+		Image img;
+		Color iconColor = Color.blue;
 		
-		try {
+		
 		if (type == CREATE){
-			img = ImageIO.read(new File("D:/rep/plus.png"));
+			img =  Helper.loadResourceImage("D:/rep/plus.png");
 		} else if (type == PLAYLIST){
-			img = (BufferedImage) ImageIO.read(new File("D:/rep/playlist.png"));
+			img = Helper.loadResourceImage("D:/rep/playlist.png");
 		} else {
-			img = (BufferedImage) ImageIO.read(new File("D:/rep/music.png"));
-			g2.drawImage(Helper.changeImageColor(img, iconColor), 20, 10, 20, 20, null);
+			img =  Helper.loadResourceImage("D:/rep/music.png");
+			g2.drawImage(Helper.changeImageColor((BufferedImage)img, iconColor), 20, 10, 20, 20, null);
 		}
-		g2.drawImage(Helper.changeImageColor(img, iconColor), 20, 10, 20, 20, null);
+		g2.drawImage(Helper.changeImageColor((BufferedImage)img, iconColor), 20, 10, 20, 20, null);
 		
-		}catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		
 		

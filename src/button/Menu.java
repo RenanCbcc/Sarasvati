@@ -61,7 +61,7 @@ public class Menu extends JPanel {
 		
 		Graphics2D g2 = Helper.getSmoothedGraphics(g);
 		
-		g2.setColor(Color.DARK_GRAY);
+		g2.setColor(Color.GREEN);
 		g2.setFont(new Font("Consolas",Font.BOLD,12));
 		
 		String title = "Sarasvat";

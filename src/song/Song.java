@@ -41,17 +41,17 @@ public class Song extends JPanel {
 		MouseAdapter mouseAdapter = new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				setBackground(Color.white);
+				setBackground(Color.lightGray);// parcialmente selecionado quando mause esta em cima
 			}
 			
 			@Override
-			public void mouseExited(MouseEvent e) {
-				setBackground(Color.red);
+			public void mouseExited(MouseEvent e) { // fundo das pastas
+				setBackground(Color.white);
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
-				setBackground(Color.white);
+				setBackground(Color.lightGray); // quando o mause eh pressionado
 				
 				if (type == BACK){
 					if (path.equals("/")){
@@ -80,7 +80,7 @@ public class Song extends JPanel {
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				setBackground(Color.white);
+				setBackground(Color.darkGray);
 			}
 		};
 		
@@ -94,23 +94,18 @@ public class Song extends JPanel {
 		Graphics2D g2 = Helper.getSmoothedGraphics(g);
 		
 		BufferedImage img;
-		Color iconColor = Color.white;
+		Color iconColor = Color.BLACK;
 		
-		try{
 		if (type == BACK){
-			img = (BufferedImage) ImageIO.read(new File("D:/rep/back.png"));
+			img = (BufferedImage) Helper.loadResourceImage("D:/rep/back.png");
 		} else if (type == FOLDER){
-			img = (BufferedImage) ImageIO.read(new File("D:/rep/folder.png"));
+			img = (BufferedImage) Helper.loadResourceImage("D:/rep/folder.png");
 		} else {
-			img = (BufferedImage) ImageIO.read(new File("D:/rep/music.png"));
+			img = (BufferedImage) Helper.loadResourceImage("D:/rep/music.png");
 		}
 		g2.drawImage(Helper.changeImageColor(img, iconColor), 20, 10, 20, 20, null);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-		g2.setColor(Color.ORANGE);
+		g2.setColor(Color.BLACK);
 		g2.setFont(new Font("Consolas",Font.ITALIC,14));
 		g2.drawString(title, 50, 22);
 		

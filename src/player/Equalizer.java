@@ -86,7 +86,7 @@ class Canvas extends JPanel {
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = Helper.getSmoothedGraphics(g);
 		
-		g2.setColor(Color.BLACK);
+		g2.setColor(Color.lightGray);
 		g2.fillRect(0, 0, getWidth(), getHeight());
 		
 		

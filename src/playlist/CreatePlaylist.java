@@ -11,37 +11,37 @@ import javax.swing.JTextField;
 
 public class CreatePlaylist extends JFrame implements ActionListener {
 	
-	Sarasvat mix;
+	Sarasvat saraswat;
 	
 	JTextField name, description;
 	JButton add;
 	
-	public CreatePlaylist(Sarasvat mix){
+	public CreatePlaylist(Sarasvat saraswat){
 		super();
 		
-		this.mix = mix;
+		this.saraswat = saraswat;
 		
 		setLayout(null);
 		setUndecorated(true);
 		
-		getContentPane().setBackground(Color.BLACK);
+		getContentPane().setBackground(Color.white);
 		
 		name = new JTextField();
-		name.setBackground(Color.GREEN);
+		name.setBackground(Color.orange);
 		name.setBorder(null);
 		name.setSize(160, 25);
 		name.setLocation(20, 20);
 		add(name);
 		
 		description = new JTextField();
-		description.setBackground(Color.GREEN);
+		description.setBackground(Color.orange);
 		description.setBorder(null);
 		description.setSize(160, 25);
 		description.setLocation(20, 50);
 		add(description);
 		
 		add = new JButton("CREATE");
-		add.setBackground(Color.GREEN);
+		add.setBackground(Color.orange);
 		add.setBorder(null);
 		add.setContentAreaFilled(true);
 		add.setOpaque(true);
@@ -51,7 +51,7 @@ public class CreatePlaylist extends JFrame implements ActionListener {
 		add(add);
 		
 		setSize(200, 130);
-		setLocationRelativeTo(mix);
+		setLocationRelativeTo(saraswat);
 		setVisible(true);
 	}
 

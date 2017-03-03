@@ -57,7 +57,7 @@ public class SongHolder extends JPanel implements MouseWheelListener {
 		Helper.getMusic();
 		folderList = Helper.getFolders();
 		
-		Song panel = new Song("Back", "Move back a directory", "/");
+		Song panel = new Song("Voltar", "Mova-se para o diretorio", "/");
 		panel.type = Song.BACK;
 		panel.setBounds(0, 0, width, 40);
 		holder.add(panel);

@@ -82,7 +82,7 @@ public class SongProgress extends JPanel implements ActionListener{
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = Helper.getSmoothedGraphics(g);
 		
-		g2.setColor(Color.black);
+		g2.setColor(Color.black); // barra de progresso
 		g2.drawLine(0, height/4, width, height/4);
 		
 		if (Helper.mediaPlayer != null && Helper.media != null){
