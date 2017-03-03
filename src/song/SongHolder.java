@@ -2,6 +2,8 @@ package song;
 import playlist.PlaylistItem;
 import playlist.Playlist;
 import button.Helper;
+
+import java.awt.Color;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
@@ -109,7 +111,7 @@ public class SongHolder extends JPanel implements MouseWheelListener {
 			Song panel = new Song("Back", "Move back to playlists", "+");
 			panel.type = Song.BACK;
 			panel.setBounds(0, 0, width, 40);
-			panel.setBackground(Helper.colorFromHEX("#eeeeee"));
+			panel.setBackground(Color.white);
 			holder.add(panel);
 			
 			for (int i = 0; i < Helper.currentSongList.size(); i++){

@@ -5,6 +5,8 @@ import button.TextButton;
 import button.CircleButton;
 import button.Button;
 import song.SongHolder;
+
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import javax.swing.JFrame;
 
@@ -17,15 +19,14 @@ public class Sarasvat extends JFrame {
 	
 	public boolean playlist = false;
 	
-	CircleButton closeButton = new CircleButton(5, 5, 10, Helper.colorFromHEX("#fc625d"), new MouseAdapter() {public void mousePressed(java.awt.event.MouseEvent e) {
-		Helper.saveJSON();
+	CircleButton closeButton = new CircleButton(5, 5, 10, Color.red, new MouseAdapter() {public void mousePressed(java.awt.event.MouseEvent e) {
 		System.exit(0);
 	};});
-	CircleButton minimizeButton = new CircleButton(20, 5, 10, Helper.colorFromHEX("#fdbc40"), new MouseAdapter() {public void mousePressed(java.awt.event.MouseEvent e) {
+	CircleButton minimizeButton = new CircleButton(20, 5, 10, Color.yellow , new MouseAdapter() {public void mousePressed(java.awt.event.MouseEvent e) {
 		frame.setState(ICONIFIED);
 	};});
 	
-	Menu menuBar = new Menu(0, 0, WIDTH, 20, Helper.colorFromHEX("#555555"), this);
+	Menu menuBar = new Menu(0, 0, WIDTH, 20, Color.green, this);
 	
 	MusicPlayer player = new MusicPlayer(0, 20, 300, 150, this);
 	
@@ -48,12 +49,11 @@ public class Sarasvat extends JFrame {
 		};
 	});
 	
-	Button volume = new Button(0, HEIGHT - 30, 30, 30, Helper.loadResourceImage("/volume.png"), Helper.colorFromHEX("#ffffff"), new MouseAdapter() {
+	Button volume = new Button(0, HEIGHT - 30, 30, 30,Color.MAGENTA , new MouseAdapter() {
 		public void mousePressed(java.awt.event.MouseEvent e) {
 			Equalizer equalizer = new Equalizer(frame, Helper.volume);
 		};
 	});
-	Button settings = new Button(WIDTH - 30, HEIGHT - 30, 30, 30, Helper.loadResourceImage("/settings.png"), Helper.colorFromHEX("#ffffff"), new MouseAdapter() {});
 	
 	public Sarasvat(){
 		super();
@@ -65,7 +65,7 @@ public class Sarasvat extends JFrame {
 		setLocationRelativeTo(null);
 		setUndecorated(true);
 		
-		getContentPane().setBackground(Helper.loadColorfromJSON("player_background"));
+		getContentPane().setBackground(Color.white);
 		
 		add(closeButton);
 		add(minimizeButton);
@@ -78,7 +78,6 @@ public class Sarasvat extends JFrame {
 		add(mymusic);
 		
 		add(volume);
-		add(settings);
 		
 		setVisible(true);
 	}
@@ -86,6 +85,6 @@ public class Sarasvat extends JFrame {
 	public static void main(String[] args) {
 		Helper.init();
 		Sarasvat saraswat = new Sarasvat();
-		saraswat.setVisible(true);
+		
 	}
 }

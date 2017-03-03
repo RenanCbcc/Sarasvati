@@ -27,6 +27,19 @@ public class Button extends JPanel {
 			addMouseListener(mouseAdapter);
 		}
 		
+		public Button(int x, int y, int width, int height, Color color, MouseAdapter mouseAdapter){
+			super();
+			this.x = x;
+			this.y = y;
+			this.color = color;
+			
+			setBounds(x, y, width, height);
+			setVisible(true);
+			
+			addMouseListener(mouseAdapter);
+		}
+		
+		
 		@Override
 		protected void paintComponent(Graphics g) {
 			Graphics2D g2 = Helper.getSmoothedGraphics(g);

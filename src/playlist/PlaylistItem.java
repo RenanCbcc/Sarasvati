@@ -2,12 +2,16 @@ package playlist;
 
 import button.Helper;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class PlaylistItem extends JPanel {
@@ -72,23 +76,23 @@ public class PlaylistItem extends JPanel {
 		this.path = path;
 		this.type = type;
 		
-		setBackground(Helper.loadColorfromJSON("list_background"));
+		setBackground(Color.WHITE);
 		
 		
 		MouseAdapter mouseAdapter = new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				setBackground(Helper.loadColorfromJSON("list_background_hover"));
+				setBackground(Color.red);
 			}
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				setBackground(Helper.loadColorfromJSON("list_background"));
+				setBackground(Color.white);
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
-				setBackground(Helper.loadColorfromJSON("list_background_onclick"));
+				setBackground(Color.GRAY);
 				
 				if (e.getX() > getWidth() - 40 && e.getX() < getWidth() - 20 && e.getY() > 10 && e.getY() < getHeight() - 10){
 					delete();
@@ -108,7 +112,7 @@ public class PlaylistItem extends JPanel {
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				setBackground(Helper.loadColorfromJSON("list_background_hover"));
+				setBackground(Color.white);
 			}
 		};
 		
@@ -126,26 +130,31 @@ public class PlaylistItem extends JPanel {
 		Graphics2D g2 = Helper.getSmoothedGraphics(g);
 		
 		BufferedImage img;
-		Color iconColor = Helper.loadColorfromJSON("list_icon");
+		Color iconColor = Color.MAGENTA;
 		
+		try {
 		if (type == CREATE){
-			img = (BufferedImage) Helper.loadResourceImage("/plus.png");
+			img = ImageIO.read(new File("D:/rep/plus.png"));
 		} else if (type == PLAYLIST){
-			img = (BufferedImage) Helper.loadResourceImage("/playlist.png");
+			img = (BufferedImage) ImageIO.read(new File("D:/rep/playlist.png"));
 		} else {
-			img = (BufferedImage) Helper.loadResourceImage("/music.png");
+			img = (BufferedImage) ImageIO.read(new File("D:/rep/music.png"));
+			g2.drawImage(Helper.changeImageColor(img, iconColor), 20, 10, 20, 20, null);
 		}
 		g2.drawImage(Helper.changeImageColor(img, iconColor), 20, 10, 20, 20, null);
 		
-		if (type != CREATE){
-			g2.drawImage(Helper.changeImageColor((BufferedImage) Helper.loadResourceImage("/trash.png"), iconColor), getWidth() - 40, 10, 20, 20, null);
+		}catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		g2.setColor(Helper.loadColorfromJSON("list_font"));
-		g2.setFont(Helper.lato_normal.deriveFont(14f));
+		
+		
+		g2.setColor(Color.white);
+		g2.setFont(new Font("Consolas",Font.ITALIC,14));
 		g2.drawString(title, 50, 22);
 		
-		g2.setFont(Helper.lato_light.deriveFont(10f));
+		g2.setFont(new Font("Consolas",Font.ITALIC,14));
 		g2.drawString(artist, 50, 32);
 	}
 }

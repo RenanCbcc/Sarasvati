@@ -21,11 +21,6 @@ import java.io.InputStreamReader;
 import java.io.Writer;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
@@ -38,17 +33,14 @@ import javafx.scene.media.MediaPlayer;
 public class Helper {
 
 	//Resources
-	public static Font lato_light;
-	public static Font lato_normal;
-	public static Font lato_bold;
+	public static Font consolas_light;
+	public static Font consolas_bold;
 	
-	public static Image play;
-	public static Image pause;
+	public static BufferedImage play;
+	public static BufferedImage pause;
 	
 	//Global Variables
 	
-	public static JsonObject colorJSON;
-	public static JsonArray playlistJSON;
 	
 	public static Sarasvat saraswat;
 	public static MusicPlayer musicPlayer;
@@ -57,7 +49,7 @@ public class Helper {
 	public static Equalizer equalizer;
 	public static double volume = 1.0;
 	
-	public static String musicPath = "/Music/";
+	public static String musicPath = "D:/Músicas";
 	public static int currentSongIndex = -1;
 	public static ArrayList<String> currentSongList = new ArrayList<String>();
 	
@@ -72,141 +64,31 @@ public class Helper {
 	public static boolean playing = false;
 	public static File nowPlaying;
 	
-	//Color from HEX
-	public static Color colorFromHEX(String hex){
-		int r = Integer.valueOf(hex.substring(1, 3), 16);
-		int g = Integer.valueOf(hex.substring(3, 5), 16);
-		int b = Integer.valueOf(hex.substring(5, 7), 16);
-		return new Color(r, g, b);
-	}
 	
 	//Initalize static helper function
 	public static void init(){
 		loadFont();
-		loadJSON();
 		
-		play = Helper.loadResourceImage("/play.png");
-		pause = Helper.loadResourceImage("/pause.png");
+		try {
+			play = ImageIO.read(new File("D:/rep/play.png"));
+			pause = ImageIO.read(new File("D:/rep/pause.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	//Load font into the function
 	public static void loadFont(){
 		try {
-			lato_light = Font.createFont(Font.TRUETYPE_FONT, Sarasvat.class.getResourceAsStream("/Lato-Light.ttf"));
-			lato_normal = Font.createFont(Font.TRUETYPE_FONT, Sarasvat.class.getResourceAsStream("/Lato-Regular.ttf"));
-			lato_bold = Font.createFont(Font.TRUETYPE_FONT, Sarasvat.class.getResourceAsStream("/Lato-Bold.ttf"));
+			consolas_light = new Font("Consolas",Font.ITALIC,12);
+			consolas_bold = new Font("Consolas",Font.BOLD ,12);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	//Load JSON file into json object
-	public static void loadJSON(){
-		JsonParser parser = new JsonParser();
-		try {
-			File colorFile = new File(System.getProperty("user.home") + "/Music/Mix/color.json");
-			
-			InputStream is;
-			if (colorFile.exists()){
-				is = new FileInputStream(colorFile);
-			} else {
-				is = Sarasvat.class.getResourceAsStream("/color.json");
-			}
-
-			InputStreamReader reader = new InputStreamReader(is);
-			colorJSON = (JsonObject) parser.parse(reader);
-			reader.close();
-			is.close();
-			
-			
-			File playlistFile = new File(System.getProperty("user.home") + "/Music/Mix/playlists.json");
-			
-			if (playlistFile.exists()){
-				is = new FileInputStream(playlistFile);
-				reader = new InputStreamReader(is);
-				playlistJSON = (JsonArray) parser.parse(reader);
-				reader.close();
-				is.close();
-			} else {
-				playlistJSON = new JsonArray();
-			}
-			
-			for (int i = 0; i < playlistJSON.size(); i++){
-				JsonObject obj = (JsonObject) playlistJSON.get(i);
-				String name = obj.get("title").toString().replace('"', ' ').trim();
-				String description = obj.get("description").toString().replace('"', ' ').trim();
-				
-				Playlist p = new Playlist(name, description);
-				JsonArray songs = (JsonArray) obj.get("songs");
-				for (int j = 0; j < songs.size(); j++){
-					String song = songs.get(j).toString().replace('"', ' ').trim();
-					p.add(song);
-				}
-				
-				playlists.add(p);
-			}
-			
-		} catch (Exception e) {
-			
-		}
-	}
-	
-	public static void saveJSON(){
-		String folderPath = System.getProperty("user.home") + "/Music/Mix/";
-		
-		if (!new File(folderPath).exists()){
-			new File(folderPath).mkdir();
-		}
-		
-		String colorPath = System.getProperty("user.home") + "/Music/Mix/color.json";
-		try {
-			Writer writer = new FileWriter(new File(colorPath));
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			gson.toJson(colorJSON, writer);
-			writer.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		String playlistPath = System.getProperty("user.home") + "/Music/Mix/playlists.json";
-		try {
-			Writer writer = new FileWriter(new File(playlistPath));
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			JsonArray playlist = new JsonArray();
-			
-			for (Playlist p : playlists){
-				JsonObject list = new JsonObject();
-				list.addProperty("title", p.getName());
-				list.addProperty("description", p.getDescription());
-				
-				JsonArray array = new JsonArray();
-				for (String s : p.songs){
-					array.add(s);
-				}
-				list.add("songs", array);
-				
-				playlist.add(list);
-			}
-			
-			gson.toJson(playlist, writer);
-			writer.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	//Get value from JSON file
-	public static String getJSON(String text){
-		return colorJSON.get(text).toString().replace('"', ' ').trim();
-	}
-	
-	//Load color directly from JSON file
-	public static Color loadColorfromJSON(String text){
-		return colorFromHEX(getJSON(text));
-	}
 	
 	//Enable Anti-aliasing, Interpolation and corrected rendering
 	public static Graphics2D getSmoothedGraphics(Graphics g){
@@ -222,7 +104,7 @@ public class Helper {
 	public static void getMusic(){
 		ArrayList<String> songList = new ArrayList<String>();
 		
-		File folder = new File(System.getProperty("user.home") + musicPath);
+		File folder = new File(musicPath);
 		File[] listOfFiles = folder.listFiles();
 		
 		for (int i = 0; i < listOfFiles.length; i++){
@@ -241,7 +123,7 @@ public class Helper {
 	public static ArrayList<String> getFolders(){
 		ArrayList<String> folderList = new ArrayList<String>();
 		
-		File folder = new File(System.getProperty("user.home") + musicPath);
+		File folder = new File(musicPath);
 		File[] listOfFiles = folder.listFiles();
 		
 		for (int i = 0; i < listOfFiles.length; i++){
@@ -325,13 +207,6 @@ public class Helper {
 		return Helper.currentSongList.get(Helper.currentSongIndex - 1);
 	}
 	
-	public static Image loadResourceImage(String path){
-		try {
-			return ImageIO.read(Sarasvat.class.getResource(path));
-		} catch (IOException e) {
-			return null;
-		}
-	}
 	
 	public static BufferedImage changeImageColor(BufferedImage img, Color color){
 		BufferedImage colored = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);

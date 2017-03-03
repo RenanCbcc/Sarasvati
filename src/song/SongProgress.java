@@ -2,6 +2,7 @@ package song;
 import player.MusicPlayer;
 import button.Helper;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -81,7 +82,7 @@ public class SongProgress extends JPanel implements ActionListener{
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = Helper.getSmoothedGraphics(g);
 		
-		g2.setColor(Helper.colorFromHEX("#ffffff"));
+		g2.setColor(Color.black);
 		g2.drawLine(0, height/4, width, height/4);
 		
 		if (Helper.mediaPlayer != null && Helper.media != null){
@@ -96,7 +97,7 @@ public class SongProgress extends JPanel implements ActionListener{
 			duration = (int)(Helper.media.getDuration().toSeconds());
 		}
 		
-		g2.setFont(Helper.lato_light.deriveFont(10f));
+		g2.setFont(new Font("Consolas",Font.ITALIC,10));
 		g2.drawString(currentTime / 60 + ":" + String.format("%02d", currentTime % 60) + " / " + duration / 60 + ":" + String.format("%02d", duration % 60), 0, (int)(height));
 	}
 

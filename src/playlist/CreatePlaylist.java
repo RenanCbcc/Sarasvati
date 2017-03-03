@@ -1,4 +1,5 @@
 package playlist;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import button.Helper;
@@ -23,24 +24,24 @@ public class CreatePlaylist extends JFrame implements ActionListener {
 		setLayout(null);
 		setUndecorated(true);
 		
-		getContentPane().setBackground(Helper.colorFromHEX("#222222"));
+		getContentPane().setBackground(Color.BLACK);
 		
 		name = new JTextField();
-		name.setBackground(Helper.colorFromHEX("#999999"));
+		name.setBackground(Color.GREEN);
 		name.setBorder(null);
 		name.setSize(160, 25);
 		name.setLocation(20, 20);
 		add(name);
 		
 		description = new JTextField();
-		description.setBackground(Helper.colorFromHEX("#999999"));
+		description.setBackground(Color.GREEN);
 		description.setBorder(null);
 		description.setSize(160, 25);
 		description.setLocation(20, 50);
 		add(description);
 		
 		add = new JButton("CREATE");
-		add.setBackground(Helper.colorFromHEX("#999999"));
+		add.setBackground(Color.GREEN);
 		add.setBorder(null);
 		add.setContentAreaFilled(true);
 		add.setOpaque(true);

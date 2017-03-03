@@ -70,26 +70,22 @@ public class MusicPlayer extends JFXPanel {
 		
 		this.title = "Not selected";
 		this.artist = "Not selected";
-		try {
-			this.unknown = ImageIO.read(Sarasvat.class.getResource("/unknown_album.png"));
-			this.image = this.unknown;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 		
 		setBounds(x, y, width, height);
 		setLayout(null);
 		
-		setBackground(Helper.loadColorfromJSON("player_background"));
+		setBackground(Color.WHITE);
 		
-		songProgress = new SongProgress(height, 60, 300 - 20 - height, 20, Helper.colorFromHEX("#ffffff"), this);
+		songProgress = new SongProgress(height, 60, 300 - 20 - height, 20, Color.BLACK, this);
 		add(songProgress);
 		
 		int w = 300 - 20 - height;
 		int r = (w - 20) / 3;
 		
-		Color iconColor = Helper.loadColorfromJSON("player_icon");
-		fastBackward = new CircleButton(height, 90, r, Helper.loadResourceImage("/fastbackward.png"), iconColor, new MouseAdapter() {
+		Color iconColor = Color.white;
+		fastBackward = new CircleButton(height, 90, r, iconColor, new MouseAdapter() 
+		{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (Helper.mediaPlayer != null){
@@ -106,7 +102,7 @@ public class MusicPlayer extends JFXPanel {
 				}
 				Helper.musicPlayer.repaint();
 		}});
-		fastForward = new CircleButton(height + (r + 10) * 2, 90, r, Helper.loadResourceImage("/fastforward.png"), iconColor, new MouseAdapter() {
+		fastForward = new CircleButton(height + (r + 10) * 2, 90, r, iconColor, new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (Helper.mediaPlayer != null){
@@ -142,11 +138,11 @@ public class MusicPlayer extends JFXPanel {
 			g2.drawImage(unknown, 20, 20, height - 40, height - 40, null);
 		}
 		
-		g2.setColor(Helper.loadColorfromJSON("player_font"));
-		g2.setFont(Helper.lato_light.deriveFont(16f));
+		g2.setColor(Color.ORANGE);
+		g2.setFont(new Font("Consolas",Font.ITALIC,10));
 		g2.drawString(title, height, 36);
 		
-		g2.setFont(Helper.lato_light.deriveFont(10f));
+		g2.setFont(new Font("Consolas",Font.ITALIC,10));
 		g2.drawString(artist, height, 50);
 		
 	}

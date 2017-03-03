@@ -1,5 +1,7 @@
 package player;
 import button.Helper;
+
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
@@ -84,10 +86,9 @@ class Canvas extends JPanel {
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = Helper.getSmoothedGraphics(g);
 		
-		g2.setColor(Helper.loadColorfromJSON("player_background"));
+		g2.setColor(Color.BLACK);
 		g2.fillRect(0, 0, getWidth(), getHeight());
 		
-		g2.setColor(Helper.colorFromHEX("#ffffff"));
 		
 		g2.drawLine(getWidth() / 2, 10, getWidth() / 2, getHeight() - 10);
 		

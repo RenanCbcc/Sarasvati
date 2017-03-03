@@ -8,6 +8,10 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class Song extends JPanel {
@@ -25,7 +29,7 @@ public class Song extends JPanel {
 		this.artist = artist;
 		this.path = path;
 		
-		setBackground(Helper.loadColorfromJSON("list_background"));
+		setBackground(Color.white);
 		
 		if (artist.equals("Folder")){
 			this.type = FOLDER;
@@ -37,17 +41,17 @@ public class Song extends JPanel {
 		MouseAdapter mouseAdapter = new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				setBackground(Helper.loadColorfromJSON("list_background_hover"));
+				setBackground(Color.white);
 			}
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				setBackground(Helper.loadColorfromJSON("list_background"));
+				setBackground(Color.red);
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
-				setBackground(Helper.loadColorfromJSON("list_background_onclick"));
+				setBackground(Color.white);
 				
 				if (type == BACK){
 					if (path.equals("/")){
@@ -76,7 +80,7 @@ public class Song extends JPanel {
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				setBackground(Helper.loadColorfromJSON("list_background_hover"));
+				setBackground(Color.white);
 			}
 		};
 		
@@ -90,21 +94,27 @@ public class Song extends JPanel {
 		Graphics2D g2 = Helper.getSmoothedGraphics(g);
 		
 		BufferedImage img;
-		Color iconColor = Helper.loadColorfromJSON("list_icon");
+		Color iconColor = Color.white;
+		
+		try{
 		if (type == BACK){
-			img = (BufferedImage) Helper.loadResourceImage("/back.png");
+			img = (BufferedImage) ImageIO.read(new File("D:/rep/back.png"));
 		} else if (type == FOLDER){
-			img = (BufferedImage) Helper.loadResourceImage("/folder.png");
+			img = (BufferedImage) ImageIO.read(new File("D:/rep/folder.png"));
 		} else {
-			img = (BufferedImage) Helper.loadResourceImage("/music.png");
+			img = (BufferedImage) ImageIO.read(new File("D:/rep/music.png"));
 		}
 		g2.drawImage(Helper.changeImageColor(img, iconColor), 20, 10, 20, 20, null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		g2.setColor(Helper.loadColorfromJSON("list_font"));
-		g2.setFont(Helper.lato_normal.deriveFont(14f));
+		g2.setColor(Color.ORANGE);
+		g2.setFont(new Font("Consolas",Font.ITALIC,14));
 		g2.drawString(title, 50, 22);
 		
-		g2.setFont(Helper.lato_light.deriveFont(10f));
+		g2.setFont(new Font("Consolas",Font.ITALIC,14));
 		g2.drawString(artist, 50, 32);
 	}
 }
