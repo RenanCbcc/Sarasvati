@@ -8,9 +8,9 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 public class Button extends JPanel {
-		int x, y, width, height;
-		Image image;
-		Color color;
+		private int x, y, width, height;
+		private Image image;
+		private Color color;
 		
 		
 		public Button(int x, int y, int width, int height, Image image, Color color, MouseAdapter mouseAdapter) {
