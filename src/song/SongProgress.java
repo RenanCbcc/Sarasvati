@@ -14,13 +14,13 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class SongProgress extends JPanel implements ActionListener{
-	int x, y, width, height;
-	Color color;
-	MusicPlayer parent;
+	private int x, y, width, height;
+	private Color color;
+	private MusicPlayer parent;
 	
-	float progress = 0;
+	private float progress = 0;
 	
-	Timer timer;
+	private Timer timer;
 	
 	public SongProgress(int x, int y, int width, int height, Color color, MusicPlayer parent) {
 		super();
