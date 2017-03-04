@@ -64,12 +64,7 @@ public class Song extends JPanel {
 						
 						Helper.songHolder.createSongItems();
 						Helper.songHolder.repaint();
-					} else {
-						Helper.songHolder.setInPlaylist(false);
-						Helper.songHolder.createPlaylistItems();
-						Helper.songHolder.repaint();
-					}
-				} else if (type == FOLDER){
+					} 	} else if (type == FOLDER){
 					Helper.musicPath += title + "/";
 					Helper.songHolder.createSongItems();
 					Helper.songHolder.repaint();

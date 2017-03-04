@@ -1,6 +1,4 @@
 package song;
-import playlist.PlaylistItem;
-import playlist.Playlist;
 import button.Helper;
 
 import java.awt.Color;
@@ -9,13 +7,13 @@ import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
-
+// esta classe mostra uma pequena janela de navegação entre as pastas
 public class SongHolder extends JPanel implements MouseWheelListener {
 	
 	private int x, y, width, height;
 	JPanel holder = new JPanel();
 	
-	ArrayList<String> folderList;
+	ArrayList<String> folderList; // lista com o nome das pastas de musica
 	
 	public boolean isInPlaylist() {
 		return inPlaylist;
@@ -43,13 +41,6 @@ public class SongHolder extends JPanel implements MouseWheelListener {
 		addMouseWheelListener(this);
 	}
 	
-	public void redraw(){
-		if (Helper.saraswat.playlist){
-			createPlaylistItems();
-		} else {
-			createSongItems();
-		}
-	}
 	
 	public void createSongItems(){
 		holder.removeAll();
@@ -62,7 +53,7 @@ public class SongHolder extends JPanel implements MouseWheelListener {
 		panel.setBounds(0, 0, width, 40);
 		holder.add(panel);
 		
-		//Draw folders
+		//Desenhas as pastas
 		for (int i = 0; i < folderList.size(); i++){
 			String path = System.getProperty("user.home") + Helper.musicPath + folderList.get(i) + ".mp3";
 					
@@ -71,7 +62,7 @@ public class SongHolder extends JPanel implements MouseWheelListener {
 			holder.add(panel);
 		}
 		
-		//Draw songs
+		//Desenha as miniaturas
 		for (int i = 0; i < Helper.currentSongList.size(); i++){
 			String path = Helper.currentSongList.get(i);
 			
@@ -88,49 +79,7 @@ public class SongHolder extends JPanel implements MouseWheelListener {
 		repaint();
 	}
 	
-	public void createPlaylistItems(){
-		holder.removeAll();
-		
-		if (!inPlaylist){
-			PlaylistItem panel = new PlaylistItem("Create Playlist", "Make a new playlist", "+", PlaylistItem.CREATE);
-			panel.setBounds(0, 0, width, 40);
-			holder.add(panel);
-			
-			for (int i = 0; i < Helper.playlists.size(); i++){
-				Playlist p = Helper.playlists.get(i);
-				panel = new PlaylistItem(p.getName(), p.getDescription(), "/", PlaylistItem.PLAYLIST);
-				panel.setBounds(0, i * 40 + 40, width, 40);
-				holder.add(panel);
-			}
-			
-			holder.setBounds(0, 0, width, 40 * Helper.playlists.size() + 40);
-			holder.setLayout(null);
-		} else {
-			Helper.getPlaylistMusic();
-			
-			Song panel = new Song("Back", "Move back to playlists", "+");
-			panel.type = Song.BACK;
-			panel.setBounds(0, 0, width, 40);
-			panel.setBackground(Color.white);
-			holder.add(panel);
-			
-			for (int i = 0; i < Helper.currentSongList.size(); i++){
-				String path = Helper.currentSongList.get(i);
-				
-				panel = new Song(Helper.getSongTitle(path), Helper.getSongArtist(path), path);
-				panel.setBounds(0, i * 40 + 40, width, 40);
-				holder.add(panel);
-			}
-			
-			holder.setBounds(0, 0, width, 40 * Helper.currentSongList.size() + 40);
-			holder.setLayout(null);
-		}
-		
-		add(holder);
-		
-		repaint();
-	}
-
+	
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		int scroll = holder.getY() - e.getWheelRotation();

@@ -1,5 +1,4 @@
 package button;
-import playlist.Playlist;
 import player.Equalizer;
 import player.MusicPlayer;
 import player.Sarasvat;
@@ -55,7 +54,6 @@ public class Helper {
 	public static int currentPlaylistIndex = -1;
 	public static ArrayList<String> currentPlaylist = new ArrayList<String>();
 	
-	public static ArrayList<Playlist> playlists = new ArrayList<Playlist>();
 	
 	public static Media media;
 	public static MediaPlayer mediaPlayer;
@@ -138,10 +136,6 @@ public class Helper {
 		return folderList;
 	}
 	
-	public static void getPlaylistMusic(){
-		currentSongList = playlists.get(currentPlaylistIndex).songs;
-		currentSongIndex = 0;
-	}
 	
 	public static void play(){
 		if (mediaPlayer == null){
