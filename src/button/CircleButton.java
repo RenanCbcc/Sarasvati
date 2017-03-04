@@ -17,10 +17,11 @@ import javax.swing.JPanel;
 
 public class CircleButton extends JPanel {
 	
-	int x, y, diameter;
-	Color color;
-	Image image;
+	private int x, y, diameter;
+	private Color color;
+	private Image image;
 	
+	// este construtor é usado nos botões fechar e minimizar
 	public CircleButton(int x, int y, int diameter, Color color, MouseAdapter mouseAdapter){
 		super();
 		this.x = x;
@@ -33,7 +34,7 @@ public class CircleButton extends JPanel {
 		
 		addMouseListener(mouseAdapter);
 	}
-	
+	// este construtor eh usado nos botoes play,proximo e anterior
 	public CircleButton(int x, int y, int diameter, Image image, Color color, MouseAdapter mouseAdapter){
 		super();
 		this.x = x;
