@@ -7,11 +7,11 @@ import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
-// esta classe mostra uma pequena janela de navegação entre as pastas
+// esta classe mostra uma pequena janela de navegacao entre as pastas
 public class SongHolder extends JPanel implements MouseWheelListener {
 	
 	private int x, y, width, height;
-	JPanel holder = new JPanel();
+	private JPanel holder = new JPanel();
 	
 	ArrayList<String> folderList; // lista com o nome das pastas de musica
 	
