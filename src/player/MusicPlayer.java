@@ -18,11 +18,11 @@ import javafx.embed.swing.JFXPanel;
 
 public class MusicPlayer extends JFXPanel {
 
-	String title, artist;
-	Image image, unknown;
+	private String title, artist;
+	private Image image, unknown;
 
-	int x, y, width, height;
-	JFrame parent;
+	private int x, y, width, height;
+	private JFrame parent;
 
 	private SongProgress songProgress;
 
@@ -82,8 +82,8 @@ public class MusicPlayer extends JFXPanel {
 		int w = 300 - 20 - height;
 		int r = (w - 20) / 3;
 
-		Color iconColor = Color.black; // cor dos botões
-		fastBackward = new CircleButton(height, 90, r, iconColor, new MouseAdapter() {
+		Color iconColor = Color.black; // cor dos botoes
+		fastBackward = new CircleButton(height, 90, r, Helper.anterior,iconColor, new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (Helper.mediaPlayer != null) {
@@ -103,7 +103,7 @@ public class MusicPlayer extends JFXPanel {
 			}
 		});
 		
-		fastForward = new CircleButton(height + (r + 10) * 2, 90, r, iconColor, new MouseAdapter() {
+		fastForward = new CircleButton(height + (r + 10) * 2, 90, r,Helper.proximo, iconColor, new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (Helper.mediaPlayer != null) {
@@ -112,7 +112,7 @@ public class MusicPlayer extends JFXPanel {
 			}
 		});
 		
-		//pequenas legedas que serão mostradas quando o mouse estiver em cima do bt.
+		//pequenas legedas que serao mostradas quando o mouse estiver em cima do bt.
 		play.setToolTipText("Reproduzir");
 		fastBackward.setToolTipText("Anterior");
 		fastForward.setToolTipText("Proxima");
