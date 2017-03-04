@@ -8,4 +8,3 @@
 * Testes
 
 ![GitHub Logo](Sarasvat 1.0.png)
-Format: ![Alt Text](url)
