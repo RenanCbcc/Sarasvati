@@ -29,8 +29,8 @@ public class Sarasvat extends JFrame {
 		};
 	});
 
-	Menu menuBar = new Menu(0, 0, WIDTH, 20, Color.lightGray, this);
-
+	Menu menuBar = new Menu(0, 0, WIDTH, 20, Color.white, this);
+	
 	MusicPlayer player = new MusicPlayer(0, 20, 300, 150, this);
 
 	SongHolder holder = new SongHolder(0, 170, 300, 250);
@@ -75,6 +75,6 @@ public class Sarasvat extends JFrame {
 	public static void main(String[] args) {
 		Helper.init();
 		Sarasvat saraswat = new Sarasvat();
-
+		saraswat.setVisible(true);
 	}
 }
