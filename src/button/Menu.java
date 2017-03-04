@@ -15,9 +15,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Menu extends JPanel {
-	int x, y, width, height;
-	Color color;
-	JFrame parent;
+	private int x, y, width, height;
+	private Color color;
+	private JFrame parent;
 	
 	Point onCliked = new Point(0,0);
 	
