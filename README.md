@@ -6,5 +6,5 @@
 * Sequence Diagram
 * Implementação
 * Testes
-![GitHub Logo](Sarasvat.png)
+* ![GitHub Logo](Sarasvat.png)
 
