@@ -2,7 +2,6 @@ package button;
 
 import player.Equalizer;
 import player.MusicPlayer;
-import player.Sarasvat;
 import song.SongHolder;
 import java.awt.Color;
 import java.awt.Font;
@@ -36,7 +35,6 @@ public class Helper {
 
 	// Global Variables
 
-	public static Sarasvat saraswat;// janela principal
 	public static MusicPlayer musicPlayer;// player de audio
 	public static SongHolder songHolder;// navegador de pastas
 
@@ -61,14 +59,13 @@ public class Helper {
 		pause = Helper.loadResourceImage("D:/rep/pause.png");
 		proximo = Helper.loadResourceImage("D:/rep/fastforward.png");
 		anterior = Helper.loadResourceImage("D:/rep/fastbackward.png");
-	
-		
+
 	}
 
 	// Load font into the function
 	public static void loadFont() {
-			consolas_light = new Font("Consolas", Font.ITALIC, 12);
-			consolas_bold = new Font("Consolas", Font.BOLD, 12);
+		consolas_light = new Font("Consolas", Font.ITALIC, 12);
+		consolas_bold = new Font("Consolas", Font.BOLD, 12);
 	}
 
 	// Enable Anti-aliasing, Interpolation and corrected rendering
@@ -185,7 +182,6 @@ public class Helper {
 		}
 		return Helper.currentSongList.get(Helper.currentSongIndex + 1);
 	}
-	
 
 	public static String getPrevSong() {
 		Helper.musicPlayer.getFastBackward().setImage(Helper.anterior);
