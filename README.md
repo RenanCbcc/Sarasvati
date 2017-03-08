@@ -1,5 +1,6 @@
-# Sarasvati - Music Streaming Service
-## Modelagem de um software em Java para disciplina Análise e Projeto de Software, UFPA. 
+Sarasvati - Music Streaming Service
+------------------
+## Modelagem de um software em :coffee:Java para disciplina Análise e Projeto de Software, UFPA. 
 * Use Case Diagram
 * Class Diagram
 * Statchart Diagram
